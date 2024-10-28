@@ -22,8 +22,8 @@ func (c *Client) ListSynonymSets(ctx context.Context, engineName string, params 
 	return &result, nil
 }
 
-func (c *Client) CreateSynonymSet(ctx context.Context, engineName string, synonymSet *CreateSynonymSetRequest) (*CreateSynonymSetResponse, error) {
-	var result CreateSynonymSetResponse
+func (c *Client) CreateSynonymSet(ctx context.Context, engineName string, synonymSet *SynonymSet) (*SynonymSetWithID, error) {
+	var result SynonymSetWithID
 	err := c.DoRequest(ctx, base.RequestParams{
 		Method: http.MethodPost,
 		Path:   fmt.Sprintf("/api/as/v1/engines/%s/synonyms", engineName),

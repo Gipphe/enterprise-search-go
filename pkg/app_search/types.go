@@ -16,12 +16,12 @@ type IndexCreateSettingsOverride struct {
 }
 
 type ListEnginesParams struct {
-	Page *PageParams `json:"page,omitempty"`
+	Page *PageParams `json:"page,omitempty" url:"page,omitempty"`
 }
 
 type PageParams struct {
-	Current *int `json:"current,omitempty"`
-	Size    *int `json:"size,omitempty"`
+	Current *int `json:"current,omitempty" url:"current,omitempty"`
+	Size    *int `json:"size,omitempty" url:"size,omitempty"`
 }
 
 type ListEnginesResponse struct {
@@ -54,7 +54,7 @@ type DeleteMetaEngineSourceResponse = GetEngineResponse
 type AddMetaEngineSourceResponse = GetEngineResponse
 
 type GetDocumentsParams struct {
-	IDs []string `json:"ids,omitempty"`
+	IDs []string `json:"ids,omitempty" url:"ids,omitempty"`
 }
 
 type GetDocumentsResponse []map[string]interface{}
@@ -71,7 +71,7 @@ type DeleteDocumentsResponse []struct {
 type UpdateDocumentsResponse = IndexDocumentsResponse
 
 type ListDocumentsParams struct {
-	Page *PageParams `json:"page,omitempty"`
+	Page *PageParams `json:"page,omitempty" url:"page,omitempty"`
 }
 
 type ListDocumentsResponse struct {
@@ -137,24 +137,27 @@ type PutSchemaRequest map[string]string
 type PutSchemaResponse map[string]string
 
 type ListSynonymSetsParams struct {
-	Page *PageParams `json:"page,omitempty"`
+	Page *PageParams `json:"page,omitempty" url:"page,omitempty"`
 }
 
 type ListSynonymSetsResponse struct {
-	Meta    Meta         `json:"meta"`
-	Results []SynonymSet `json:"results"`
+	Meta    Meta               `json:"meta"`
+	Results []SynonymSetWithID `json:"results"`
 }
 
 type SynonymSet struct {
+	Synonyms []string `json:"synonyms"`
+}
+type SynonymSetWithID struct {
 	ID       string   `json:"id,omitempty"`
 	Synonyms []string `json:"synonyms"`
 }
 
 type CreateSynonymSetRequest = SynonymSet
-type CreateSynonymSetResponse = SynonymSet
-type GetSynonymSetResponse = SynonymSet
+type CreateSynonymSetResponse = SynonymSetWithID
+type GetSynonymSetResponse = SynonymSetWithID
 type PutSynonymSetRequest = SynonymSet
-type PutSynonymSetResponse = SynonymSet
+type PutSynonymSetResponse = SynonymSetWithID
 
 type DeleteSynonymSetResponse struct {
 	Deleted bool `json:"deleted"`
